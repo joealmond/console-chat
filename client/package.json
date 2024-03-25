@@ -1,0 +1,15 @@
+{
+    "scripts": {
+        "start": "nodemon client.js"
+    },
+    "name": "console-chat-client",
+    "version": "0.0.1",
+    "description": "console chat app using socket.io",
+    "type": "module",
+    "dependencies": {
+      "socket.io-client": "^4.7.5"
+  },
+    "devDependencies": {
+        "nodemon": "^3.1.0"
+    }
+}
