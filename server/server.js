@@ -14,6 +14,15 @@ const io = new Server(server, {
   connectionStateRecovery: {},
 });
 
+io.use((socket, next) => {
+  const username = socket.handshake.auth.username;
+  if (!username) {
+    return next(new Error("invalid username"));
+  }
+  socket.username = username;
+  next();
+}); 
+
 io.on("connection", (socket) => {
   console.log(`Socket connected: ${socket.id}`);
 

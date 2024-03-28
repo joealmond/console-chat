@@ -1,6 +1,9 @@
-import { io } from "socket.io-client";
+import socket from "./socket.js"
+import rl from "./readline.js"
 
-const socket = io("http://127.0.0.1:3000/");
+socket.onAny((event, ...args) => {
+  console.log(event, args);
+});
 
 socket.on('connect', () => {
     console.log('Socket has connected.');
@@ -9,3 +12,17 @@ socket.on('connect', () => {
   socket.on('disconnect', () => {
     console.log('Socket has disconnected.');
   });
+
+
+rl.question('Please enter your name: ', (username) => {
+  console.log(`You entered: ${username}`);
+
+  rl.close();
+  onUsernameSelection(username);
+});
+
+
+function onUsernameSelection(username) {
+  socket.auth = { username };
+  socket.connect();
+}
